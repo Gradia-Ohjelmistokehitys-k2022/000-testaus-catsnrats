@@ -1,5 +1,5 @@
 # upstreamin osoite
-'''https://github.com/PetriRaatikainenGradia/k24-ohjelmistotestaus'''
+```https://github.com/PetriRaatikainenGradia/k24-ohjelmistotestaus```
 
 # Testaus
 Gradia testaus kurssin arkisto (repository).

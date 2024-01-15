@@ -1,5 +1,3 @@
-# upstreamin osoite
-```https://github.com/PetriRaatikainenGradia/k24-ohjelmistotestaus```
 
 # Testaus
 Gradia testaus kurssin arkisto (repository).
@@ -59,7 +57,7 @@ Tämä tehdään vain kerran kurssin aluksi. Olet saanut itsellesi linkin github
 # Uusien tehtävänantojen hakeminen
 Kaikki tämä tehdään GitBashissä harjoitustehtävän hakemistossa.
 1. ```git status``` - tarkista että olet main haarassa (branch), ja että sinulla ei ole avoimia muutoksia (jotka näkyvät punaisena tai vihreänä). Mikäli niitä on, tallenna ne ensin komennoilla ```git add .```, ```git commit -m "Muutokset talteen."```.
-2. <mark>Tämä tehdään vain kerran.</mark> Lisätään alkuperäinen pohja haettavaksi seuraavalla komennolla, jos muutoksia materiaaleihin tulee.```git remote add upstream https://github.com/Gradia-Ohjelmistokehitys-k2022/testaus-pohja.git```
+2. <mark>Tämä tehdään vain kerran.</mark> Lisätään alkuperäinen pohja haettavaksi seuraavalla komennolla, jos muutoksia materiaaleihin tulee.```git remote add upstream https://github.com/PetriRaatikainenGradia/k24-ohjelmistotestaus```
 3. Haetaan uusin versio upstreamista ``git pull upstream main --allow-unrelated-histories`` --allow-unrelated-histories voi ratkaista githubclassroomiin liittyviä ongelmia.
 4. Varmista, että olet main branchissa seuraavalla komennolla```git checkout main```
 

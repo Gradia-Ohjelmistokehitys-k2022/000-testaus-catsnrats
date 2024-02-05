@@ -25,7 +25,11 @@ Osaamisen arviointi:
 
 # Git ohje
 
+<<<<<<< HEAD
 # SSH avaimen luonti Githubia varten
+=======
+# (unohda) SSH avaimen luonti Githubia varten
+>>>>>>> aa1a282f48d668669a7df21df98889d683bfb184
 Perjantaina 13. elokuuta Github muutti kirjautumisvaatimuksiaan ja login/salasana kirjautuminen ei enää toimi. Tämän takia luomme kaikille SSH avaimet ja käytämme niitä autentikointiin Githubin kanssa.
 **HUOM! Jos pääset normaalisti kirjautumaan Githubiin ei SSH avaimiin siirtyminen ole pakollista. Tee siis nämä vaiheet vain jos Github ei enää päästä sinua sisään!**
 

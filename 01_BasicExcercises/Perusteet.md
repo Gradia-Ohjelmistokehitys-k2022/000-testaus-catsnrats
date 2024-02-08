@@ -7,19 +7,22 @@
 * https://learn.microsoft.com/en-us/visualstudio/test/unit-test-basics?view=vs-2022#write-your-tests
 * https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
 
-*Huom!* Voit tehdä tehtävät yksi ja kaksi samaan solutiooniin. Nimeä Program luokka uudelleen esimerkiksi MathOperations luokaksi. Tee jokaiselle eri operaatiolle oma metodi. Lisää solutioniin MS-test projekti, johon lisäät referenssiksi alkuperäisen projektisi.
+*Huom!* VOIT TEHDÄ TEHTÄVÄT YKSI JA KAKSI SAMAAN SOLUTIOONIIN. Nimeä Program luokka uudelleen esimerkiksi MathOperations luokaksi. 
+Tee jokaiselle eri operaatiolle oma metodi. Lisää solutioniin MS-test projekti, johon lisäät referenssiksi alkuperäisen projektisi.
 
 Kun teet metodiin testejä, niin testaa yhtä asiaa kerrallaan. Jos löydät toisen tapauksen, niin tee sille uusi testi.
 Testaa tehtävissä seuraavia asioita:
-Hyvän päivän "ns. good weather" tapaus eli, jos ohjelma laskee yhteen 2+2, niin testin oletustulos on 4 ja testit menevät läpi.
-Huono tapaus eli "ns. bad weather", jos lasketaan 2-3 = -5, niin tulee virhe."Ei ole oikein."
+Hyvän päivän "ns. GOOD WEATHER" tapaus eli, jos ohjelma laskee yhteen 2+2, niin testin oletustulos on 4 ja testit menevät läpi.
+Huono tapaus eli "ns. BAD WEATHER", jos lasketaan 2-3 = -5, niin tulee virhe."Ei ole oikein."
 Testaa lukujen rajat, koska esimerkiksi neliöjuuri ei voi olla negatiivisesta luvusta. 
 
-Tee tehtäviin 1-2 VÄHINTÄÄN 3 testitapausta per kohta ja tiedostojen käsittelyyn vähintään 4 testitapausta.
+TEE TEHTÄVIIN 1-2 VÄHINTÄÄN 3 TESTITAPAUSTA PER KOHTA JA TIEDOSTOJEN KÄSITTELYYN VÄHINTÄÄN 4 TESTITAPAUSTA.
 
 ## 1. Lukujen testaamista
- 1. Tee ohjelma, joka ottaa parametrina kaksi kokonaislukua(int), vähentää ne toisistaan ja palauttaa lopputuloksen. Luvut voivat olla negatiivisia. Tee ohjelmalle yksikkötestit.
- 2. Tee ohjelma, joka ottaa syötteenä kokonaisluvun. Sallituin suurin arvo, jonka ohjelma käsittelee on 100. Ohjelma palauttaa luvun toisen potenssin (n^2). Tee ohjelmalle yksikkötestit.
+ 1. Tee ohjelma, joka ottaa parametrina kaksi kokonaislukua(int), vähentää ne toisistaan ja palauttaa lopputuloksen. Luvut voivat olla negatiivisia. 
+ Tee ohjelmalle yksikkötestit.
+ 2. Tee ohjelma, joka ottaa syötteenä kokonaisluvun. Sallituin suurin arvo, jonka ohjelma käsittelee on 100. Ohjelma palauttaa luvun toisen potenssin (n^2). 
+ Tee ohjelmalle yksikkötestit.
  3. Tee ohjelma, joka ottaa parametrinä kokonaisluvun. Ohjelma palauttaa luvun neliöjuuren. Tee ohjelmalle yksikkötestit.
 
 ## 2. Etsi pienin, suurin, laske keskiarvo

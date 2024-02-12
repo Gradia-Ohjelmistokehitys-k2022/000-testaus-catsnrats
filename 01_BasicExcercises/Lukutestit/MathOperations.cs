@@ -13,7 +13,7 @@ namespace MathOperations
         }
         static void KayttajanSyote()
         {
-            // Tehtävän 1.1 (AAA). Käyttäjän syötteen testaamisen osa.            
+            // Tehtävän 1.2 (AAA). Käyttäjän syötteen testaamisen osa.            
             // arrange
             string? uLuku;
             int luku1;
@@ -42,6 +42,18 @@ namespace MathOperations
         public static double Eksponentti(int a)
         {
             return Math.Pow(a, 2); 
+        }
+
+        // Tehtävä 1.3 metodi
+        public static double SquareRoot(int number)
+        {
+            // Negatiivisen luvun tarkistus
+            if (number < 0)
+            {
+                throw new ArgumentException("Syötteen pitää olla positiivinen luku.");
+            }
+
+            return Math.Sqrt(number);
         }
     }    
 }

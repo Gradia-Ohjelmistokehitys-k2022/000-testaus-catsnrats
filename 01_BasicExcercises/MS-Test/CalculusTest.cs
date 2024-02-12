@@ -53,18 +53,35 @@ namespace MS_Test
             Assert.AreNotEqual(10, tulos1, $"Luvun {luku1} ei pitäisi olla 2^n");
             Assert.AreEqual(64, tulos2, $"Luvun {tulos2} pitäisi olla 2^3");
         }
+        // ### Tehtävän 1.3 testit ### //
         [TestMethod]
-        public void n2Eksponentti() // onko 2 exponentti vai ei
+        public void Neliojuuritesti_Positiivinen()
         {
-            // arrange
-            int luku1 = 10;
-            int luku2 = 8;
-            // act
-            bool tulos1 = Calculations.Eksponentti(luku1);
-            bool tulos2 = Calculations.Eksponentti(luku2);
-            // assert
-            Assert.IsFalse($"Luvun {tulos2} ei pitäisi olla 2:n eksponentti.");
-            Assert.IsTrue($"Luvun {tulos1} pitäisi olla 2:n eksponentti.");
+            // Arrange
+            int number = 9;
+            // Act
+            double result = Calculations.SquareRoot(number);
+            // Assert
+            Assert.AreEqual(3, result, "9:n neliöjuuri pitäisi olla 3.");
+        }
+        [TestMethod]
+        public void TestSquareRoot_Zero()
+        {
+            // Arrange
+            int number = 0;
+            // Act
+            double result = Calculations.SquareRoot(number);
+            // Assert
+            Assert.AreEqual(0, result, "0:n neliöjuuri pitäisi olla 0.");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSquareRoot_NegativeNumber()
+        {
+            // Arrange
+            int number = -1;
+            // Act and Assert (Expecting an ArgumentException)
+            double result = Calculations.SquareRoot(number);
         }
     }
 }

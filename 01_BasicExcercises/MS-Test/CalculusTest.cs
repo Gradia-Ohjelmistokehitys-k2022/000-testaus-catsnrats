@@ -83,5 +83,87 @@ namespace MS_Test
             // Act and Assert (Expecting an ArgumentException)
             double result = Calculations.SquareRoot(number);
         }
+
+        // ### Tehtävän 2.1 testit ### //
+        [TestMethod]
+        public void PieninPosLukuTesti()
+        {
+            // Arrange
+            List<double> luvut = new List<double> { 5.0, 3.0, 8.0, 1.0, 7.0 };
+            // Act
+            double tulos = Calculations.PieninLuku(luvut);
+            // Assert
+            Assert.AreEqual(1.0, tulos, "Pienin luku pitäisi olla 1.0.");
+        }
+        [TestMethod]
+        public void PieninNegLukuTesti()
+        {
+            // Arrange
+            List<double> luvut = new List<double> { -5.0, -3.0, -8.0, -1.0, -7.0 };
+            // Act
+            double tulos = Calculations.PieninLuku(luvut);
+            // Assert
+            Assert.AreEqual(-8.0, tulos, "Pienin luku pitäisi olla -8.0.");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NullListaTesti()
+        {
+            // Arrange
+            List<double> luvut = null;
+            // Act and Assert (Expecting an ArgumentException)
+            double result = Calculations.PieninLuku(luvut);
+        }
+
+        // ### Teht. 2.2 testit ### //
+        [TestMethod]
+        public void SuurinPosLukuTesti()
+        {
+            // Arrange
+            List<int> luvut = new List<int> { 1, 2, 3, 4, 8, 16 };
+            // Act
+            int tulos = Calculations.SuurinLuku(luvut);
+            // Assert
+            Assert.AreEqual(16, tulos, "Luvun pitäisi olla 16.");
+        }
+        [TestMethod]
+        public void SuurinNegLukuTesti() // "suurin" => lähinnä nollaa
+        {
+            // Arrange
+            List<int> luvut = new List<int> { -16, -24, -32, -40, -48, -56 };
+            // Act
+            int tulos = Calculations.SuurinLuku(luvut);
+            // Assert
+            Assert.AreNotEqual(-24, tulos, "Luvun ei pitäisi olla -24");
+        }
+        [TestMethod]
+        public void SuurinKahdellaJaollinenLukuTesti()
+        {
+            // arrange
+            List<int> luvut = new List<int> { 3, 4, 5, 6, 10, 20, 150, 225 };
+            // act
+            int tulos = Calculations.SuurinLuku(luvut);
+            // assert
+            if (tulos % 2 == 0)
+            {
+                Console.WriteLine($"{tulos} on kahdella jaollinen");
+            }
+            else 
+            {
+                Console.WriteLine($"{tulos} ei ole kahdella jaollinen.");
+            }
+        }
+
+        /// ### Teht. 2.3 testit ### ///
+        [TestMethod]
+        public void PositiivistenKeskiarvo()
+        {
+            // Arrange
+            List<float> luvut = new List<float> { 5.0f, 3.0f, 8.0f, 1.0f, 7.0f };
+            // Act
+            float tulos = Calculations.LukujenKeskiarvo(luvut);
+            // Assert
+            Assert.AreEqual(4.8f, tulos, "Keskiarvon kuuluisi olla 4.8.");
+        }        
     }
 }

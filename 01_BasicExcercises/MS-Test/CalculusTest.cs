@@ -164,6 +164,28 @@ namespace MS_Test
             float tulos = Calculations.LukujenKeskiarvo(luvut);
             // Assert
             Assert.AreEqual(4.8f, tulos, "Keskiarvon kuuluisi olla 4.8.");
-        }        
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void LaskeKeskiarvo_NullTesti()
+        {
+            // Arrange
+            List<float> luvut = null;
+
+            // Act and Assert (Expecting an ArgumentException)
+            float tulos = Calculations.LukujenKeskiarvo(luvut);
+        }
+        [TestMethod]
+        public void NegatiivistenKeskiarvo()
+        {
+            // Arrange
+            List<float> luvut = new List<float> { -5.0f, -3.0f, -8.0f, -1.0f, -7.0f };
+
+            // Act
+            float tulos = Calculations.LukujenKeskiarvo(luvut);
+
+            // Assert
+            Assert.AreEqual(-4.8f, tulos, "Keskiarvon kuuluisi olla -4.8.");
+        }
     }
 }

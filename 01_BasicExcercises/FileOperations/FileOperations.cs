@@ -24,9 +24,15 @@ namespace TestFiles
             StreamReader reader = new StreamReader(directory + filePath);
             try
             {
+                // Luki alunperin tiedostosta jotain, väittäen ettei tiedosto ollut tyhjä. Muokattu 4. testiä varten
+                // Pitäisi estää "tyhjän" lukemisen muuttujaan 'fileContent'
                 do
                 {
-                    fileContent.Add(reader.ReadLine());
+                    string line = reader.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        fileContent.Add(line);
+                    }                    
                 }
                 while (reader.Peek() != -1);
             }

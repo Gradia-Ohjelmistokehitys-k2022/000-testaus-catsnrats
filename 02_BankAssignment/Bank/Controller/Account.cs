@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace Bank.Controller
+﻿namespace Bank.Controller
 {
     public class Account // Luokassa pankkitilin perusominaisuudet
     {
@@ -13,7 +9,8 @@ namespace Bank.Controller
 
         private readonly string? m_customerName;
         private double m_balance;
-
+        private static int s_nextAccountId = 1; // uniikeille account ID:lle (yhdellä asiakkaalla useampi tili)
+        public int AccountId { get; private set; }        
         public Account(string customerName, double balance) // tilin avauksen käsittely
         {
             if (balance < 0) // avaus-summan tarkistus
@@ -22,6 +19,7 @@ namespace Bank.Controller
             }
             m_customerName = customerName;
             m_balance = balance;
+            AccountId = s_nextAccountId++; // luo tilille ID:n
         }
 
         // (expression => member): lyhyempi syntaksi vs. 'get { return }' mutta sama toiminta

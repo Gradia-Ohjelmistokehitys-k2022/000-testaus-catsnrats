@@ -8,7 +8,7 @@ namespace Bank.Controller
     public class Customer // luokka tilien luontiin
     {
         private readonly string m_customerName;
-        private readonly List<BankAccount.Bank> m_accounts; // listaan voi lisätä yhdelle asiakkaalle useamman tilin
+        private readonly List<Bank.Controller.Account> m_accounts; // listaan voi lisätä yhdelle asiakkaalle useamman tilin
 
         public Customer(string customerName)
         {
@@ -17,12 +17,12 @@ namespace Bank.Controller
                 throw new ArgumentNullException("Customer name can't be null or empty", nameof(customerName));
             }
             m_customerName = customerName;
-            m_accounts = new List<BankAccount.Bank>();
+            m_accounts = new List<Bank.Controller.Account>();
         }
 
         public string CustomerName => m_customerName;
-        public IReadOnlyList<BankAccount.Bank> Accounts => m_accounts;
-        public void AddAccount(BankAccount.Bank account) // metodi tilin lisäämiseen 
+        public IReadOnlyList<Bank.Controller.Account> Accounts => m_accounts;
+        public void AddAccount(Bank.Controller.Account account) // metodi tilin lisäämiseen 
         {
             if (account == null)
             {

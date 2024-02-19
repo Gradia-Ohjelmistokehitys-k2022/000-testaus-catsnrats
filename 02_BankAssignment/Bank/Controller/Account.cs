@@ -10,7 +10,7 @@
         private readonly string? m_customerName;
         private double m_balance;
         private static int s_nextAccountId = 1; // uniikeille account ID:lle (yhdellä asiakkaalla useampi tili)
-        public int AccountId { get; private set; }        
+        public int AccountId { get; private set; } // määrittelee AccountId-ominaisuuden
         public Account(string customerName, double balance) // tilin avauksen käsittely
         {
             if (balance < 0) // avaus-summan tarkistus

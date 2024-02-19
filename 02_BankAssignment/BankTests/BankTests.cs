@@ -100,12 +100,12 @@ namespace BankTests
             Assert.AreEqual(0, customer.Accounts.Count);
         }
         [TestMethod]
-        public void CreateCustomer_InvalidName_ThrowsArgumentException() // TARKISTA TÄMÄ SEURAAVALLA KERRALLA
+        public void CreateCustomer_InvalidName_ThrowsArgumentException() // bad weather -test tilanteelle missä asiakkaan nimeksi asetetaan 'null'
         {
             // arrange
             string invalidName = null;
             // act & assert
-            Assert.ThrowsException<ArgumentException>(() => new Customer(invalidName));
+            Assert.ThrowsException<ArgumentNullException>(() => new Customer(invalidName));
         }
         [TestMethod]
         public void AddAccount_NullAccount_ThrowsArgumentNullException()
@@ -113,7 +113,28 @@ namespace BankTests
             // arrange
             Customer customer = new Customer("Mrs. Rabbit");
             // act & assert
-            Assert.ThrowsException<ArgumentNullException>(() => customer.AddAccount(null));            
+            Assert.ThrowsException<ArgumentNullException>(() => customer.AddAccount(null)); // yrittää asettaa 'null' tilin asiakkaalle            
+        }
+        [TestMethod]
+        public void RemoveAccount_ExistingAccount_ShouldRemoveAccount() // RemoveAccount-metodin good weather test
+        {
+            // arrange
+            Customer customer = new Customer("Mr. Fox");
+            Account account = new Account("Savings", 1000);
+            customer.AddAccount(account);
+            // act
+            customer.RemoveAccount(account);
+            // assert
+            Assert.AreEqual(0, customer.Accounts.Count, "Account should be removed");
+        }
+        [TestMethod]
+        public void RemoveAccount_NonExistingAccount_ThrowsInvalidOperationException() // RemoveAccount bad weather test
+        {
+            // arrange
+            Customer customer = new Customer("Mr. Mole");
+            Account account = new Account("Checking", 500);
+            // act & assert
+            Assert.ThrowsException<InvalidOperationException>(() => customer.RemoveAccount(account));
         }
     }
 }

@@ -30,5 +30,13 @@ namespace Bank.Controller
             }
             m_accounts.Add(account);
         }
+        public void RemoveAccount(Bank.Controller.Account account) // metodi tilin poistamiseen
+        {
+            if (account == null) 
+            {
+                throw new ArgumentNullException(nameof(account), "Account can't be null");
+            }
+            m_accounts.Remove(account);
+        }
     }
 }

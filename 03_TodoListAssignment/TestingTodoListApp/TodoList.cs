@@ -8,36 +8,27 @@ namespace TestingTodoListApp
 {
     public class TodoList
     {
-
         private readonly List<TodoTask> _tasks;
         private int _taskCounter = 0;
-        public IEnumerable<TodoTask> All => _TodoItems; //https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all?view=net-6.0
-        public List<TodoTask> _TodoItems { get => _tasks; }
+        public IEnumerable<TodoTask> All => _TodoItems;
+        public List<TodoTask> _TodoItems => _tasks;
 
-        /// <summary>
-        /// Each time new todolist is created. New list of tasks is created.
-        /// </summary>
         public TodoList()
         {
-            _tasks = new List<TodoTask>();
-            //string defaultTask = $"Task number {_taskCounter}"; // remove
-            //TodoTask item = new(defaultTask);
+            _tasks = new List<TodoTask>();           
         }
         public void AddItemToList(TodoTask item)
         {
             _taskCounter++;
             _tasks.Add(item with { Id = _taskCounter});
-
         }
 
         public void RemoveItemFromList(TodoTask item)
         {
             if (_tasks.Contains(item))
             {
-                _tasks.Remove(item with { Id = _taskCounter-- });
-
+                _tasks.Remove(item); _taskCounter--;
             }
-
         }
 
         public void CompleteItem(int id)

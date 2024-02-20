@@ -7,22 +7,13 @@ using System.Xml.Linq;
 
 namespace TestingTodoListApp
 {
-    public record TodoTask(string TaskDescription) // ota selvää recordin toiminnasta
-    {
-        
+    // lue myöhemmin
+    // https://www.c-sharpcorner.com/article/c-sharp-9-0-introduction-to-record-types/
+    public record TodoTask(string TaskDescription) // record typen property TaskDescription
+    {        
+        // uniikki Id tehtävälle (task)
         public int Id { get; init; } //init makes property immutable which means you cannot change value with set afterwards.
-        public bool IsCompleted { get; init; }
-
-       
-        public override string ToString()
-        {
-            return $"Id: {Id} + Task: {TaskDescription} + Did you do it?: {IsCompleted}";
-        }
+        public bool IsCompleted { get; init; } // boolean (onko tehtävä tehty vai ei)
+        public override string ToString() => $"Id: {Id} | Task: {TaskDescription} | Did you do it?: {IsCompleted}";
     }
-
 }
-
-
-
-
-

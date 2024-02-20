@@ -3,14 +3,9 @@ using System.Linq;
 using TestingTodoListApp;
 
 namespace TodoListNS
-{
-
-    /// <summary>
-    /// Todo list. You can inserts things to do. Delete them. Complete them.
-    /// </summary>
+{    
     public class Program
     {
-
         public static void Main()
         {
             TodoList todoList = new ();
@@ -29,8 +24,6 @@ namespace TodoListNS
             {
                 Console.WriteLine(item);
             }
-
         }
-
     }
 }

@@ -36,6 +36,10 @@ namespace Bank.Controller
             {
                 throw new ArgumentNullException(nameof(account), "Account can't be null");
             }
+            if (!m_accounts.Contains(account))
+            {
+                throw new InvalidOperationException("Account not found in customer's list");
+            }
             m_accounts.Remove(account);
         }
     }

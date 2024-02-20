@@ -50,5 +50,25 @@
 
             m_balance += amount;
         }
+        public void Transfer(Account destinationAccount, double amount) // metodi rahansiirtoon
+        {
+            if (destinationAccount == null)
+            {
+                throw new ArgumentNullException(nameof(destinationAccount), "Destination account can't be null");
+            }
+
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), amount, "Transfer amount must be greater than zero");
+            }
+
+            if (amount > Balance)
+            {
+                throw new InvalidOperationException("Insufficient funds for transfer");
+            }
+            // toteuttaa siirron
+            Debit(amount); // nosto tililtä
+            destinationAccount.Credit(amount); // talletus
+        }
     }
 }

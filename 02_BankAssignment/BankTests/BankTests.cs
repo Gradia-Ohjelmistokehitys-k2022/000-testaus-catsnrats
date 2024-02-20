@@ -85,6 +85,43 @@ namespace BankTests
             // act & assert            
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => account.Credit(creditAmount));            
         }
+        [TestMethod]
+        public void Transfer_ValidTransfer_ShouldUpdateBalances() // rahansiirtometodin testi
+        {
+            // arrange
+            Account sourceAccount = new Account("Source", 1000);
+            Account destinationAccount = new Account("Destination", 500);
+            // act
+            sourceAccount.Transfer(destinationAccount, 300);
+            // assert
+            Assert.AreEqual(700, sourceAccount.Balance, 0.001, "Source account balance should be updated");
+            Assert.AreEqual(800, destinationAccount.Balance, 0.001, "Destination account balance should be updated");
+        }
+        [TestMethod]
+        public void Transfer_InvalidTransfer_DoesNotUpdateBalances() // bad weather testi rahansiirron metodille
+        {
+            // arrange
+            Account sourceAccount = new Account("Source", 1000);
+            Account destinationAccount = new Account("Destination", 500);
+            // act
+            sourceAccount.Transfer(destinationAccount, -300); // virheellinen negatiivisen summma siirto
+            // assert
+            Assert.AreEqual(1000, sourceAccount.Balance, 0.001, "Source account balance should not be updated");
+            Assert.AreEqual(500, destinationAccount.Balance, 0.001, "Destination account balance should not be updated");
+        }
+        [TestMethod]
+        public void Transfer_InsufficientFunds_DoesNotUpdateBalance()
+        {
+            // arrange
+            Account sourceAccount = new Account("Source", 100);
+            Account destinationAccount = new Account("Destination", 500);
+            // act & assert
+            Assert.ThrowsException<InvalidOperationException>(() => sourceAccount.Transfer(destinationAccount, 300));
+            // saldojen pitäisi pysyä muuttumattomana
+            Assert.AreEqual(100, sourceAccount.Balance, 0.001, "Source account balance should not be updated");
+            Assert.AreEqual(500, destinationAccount.Balance, 0.001, "Destination account balance should not be updated");
+        }
+
 
         // ### Customer-luokan testejä ### //
         [TestMethod]

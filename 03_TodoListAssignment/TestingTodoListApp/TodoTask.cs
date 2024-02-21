@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestingTodoListApp
-{
-    // lue myöhemmin
-    // https://www.c-sharpcorner.com/article/c-sharp-9-0-introduction-to-record-types/
+{    
     public record TodoTask(string TaskDescription) // record typen property TaskDescription
     {        
         // uniikki Id tehtävälle (task)

@@ -8,19 +8,24 @@ namespace TodoListNS
     {
         public static void Main()
         {
-            TodoList todoList = new ();
+            TodoList todoList = new();
 
-            todoList.AddItemToList(new TodoTask("Do the dishes"));
-          
+            todoList.AddItemToList(new TodoTask("Do the dishes"));          
             todoList.AddItemToList(new TodoTask("Wash your clothes"));
-            var list = todoList.All; //for iterations
-            var anotherList = todoList._TodoItems; //original style of getting list
-            foreach (var item in list)
+
+            var listAll = todoList.All; //for iterations
+            var listItems = todoList.TodoItems; //original style of getting list
+
+            // tulostaa kaikki tehtävät
+            Console.WriteLine("All tasks from list:");
+            foreach (var item in listAll)
             {
                 Console.WriteLine(item);
             }
 
-            foreach (var item in anotherList)
+            // tulostaa toisen samanlaisen listan ? onko tarpeellinen
+            Console.WriteLine("\nTasks from items:");
+            foreach (var item in listItems)
             {
                 Console.WriteLine(item);
             }

@@ -9,22 +9,26 @@ namespace TestingTodoListApp
     public class TodoList
     {
         private readonly List<TodoTask> _tasks; // lista Todo-"tehtäville"
-        public IEnumerable<TodoTask> Tasks => _tasks.AsReadOnly();
-
+        private readonly List<TodoTask> _doneTasks; // lista tehdyille tehtäville
         private int _taskCounter = 0;
-        public IEnumerable<TodoTask> All => TodoItems;
-        public List<TodoTask> TodoItems => _tasks;
 
-        public TodoList() // konstruktori alustaa task-listan
+        public IEnumerable<TodoTask> All => _tasks;
+        public IEnumerable <TodoTask> DoneTasks => _doneTasks;
+        public IEnumerable<TodoTask> TodoItems => _tasks.Except(_doneTasks).ToList();        
+        
+       // public List<TodoTask> TodoItems => _tasks;
+
+        public TodoList() // konstruktori alustaa task-listat
         {
-            _tasks = new List<TodoTask>();           
+            _tasks = new List<TodoTask>(); 
+            _doneTasks = new List<TodoTask>();
         }
         public void AddItemToList(TodoTask item) // metodi tehtävän (task) lisäämiseen listaan
         {
             _taskCounter++;
             _tasks.Add(item with { Id = _taskCounter});
         }
-        public void RemoveItemFromList(TodoTask item) // metodi tehtävän poistoon
+        public void RemoveItemFromList(TodoTask item) // metodi tehtävän poistoon ? onko tarpeellinen
         {
             if (_tasks.Contains(item))
             {
@@ -34,11 +38,23 @@ namespace TestingTodoListApp
             }
         }
         public void CompleteItem(int id)
-        {            
-            var item = _tasks.First(x => x.Id == id); // löytää ToDo-taskin Id:n perusteella ?
+        {
+            Console.WriteLine($"Attempting to complete task with Id {id}");
 
-            if (item != null) // tarkistaa onko 'item' olemassa ennen poistoa
-                RemoveItemFromList(item);
+            var item = _tasks.FirstOrDefault(x => x.Id == id); // kaivaa ensimmäisen TodoTaskin listalta _tasks (LINQ FirstOrDefault)
+
+            // Tarkistaa onko 'item' olemassa ennen poistoa. Merkitsee tehtävän tehdyksi, poistaa ja siirtää tehdyt _doneTasks-listaan.
+            if (item != null)
+            {
+                _tasks.Remove(item);
+                item = item with { IsCompleted = true };                                              
+                _doneTasks.Add(item);
+                Console.WriteLine($"Task with Id {id} completed successfully");
+            }
+            else 
+            {
+                Console.WriteLine($"Task with Id {id} not found in the undone tasks list.");                
+            }
         }
     }
 }

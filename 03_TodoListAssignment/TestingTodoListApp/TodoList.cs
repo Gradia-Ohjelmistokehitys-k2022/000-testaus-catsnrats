@@ -38,23 +38,16 @@ namespace TestingTodoListApp
             }
         }
         public void CompleteItem(int id)
-        {
-            Console.WriteLine($"Attempting to complete task with Id {id}");
-
+        {         
             var item = _tasks.FirstOrDefault(x => x.Id == id); // kaivaa ensimmäisen TodoTaskin listalta _tasks (LINQ FirstOrDefault)
 
             // Tarkistaa onko 'item' olemassa ennen poistoa. Merkitsee tehtävän tehdyksi, poistaa ja siirtää tehdyt _doneTasks-listaan.
             if (item != null)
-            {
+            {                
+                var updatedItem = item with { IsCompleted = true };
                 _tasks.Remove(item);
-                item = item with { IsCompleted = true };                                              
-                _doneTasks.Add(item);
-                Console.WriteLine($"Task with Id {id} completed successfully");
-            }
-            else 
-            {
-                Console.WriteLine($"Task with Id {id} not found in the undone tasks list.");                
-            }
+                _doneTasks.Add(updatedItem);                
+            }            
         }
     }
 }

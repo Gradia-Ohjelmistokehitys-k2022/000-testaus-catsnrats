@@ -21,8 +21,8 @@ namespace TodoListNS
             todoList.AddItemToList(new TodoTask("Wash your clothes"));
             todoList.AddItemToList(new TodoTask("Vacuum the living room"));
 
-            var listAll = todoList.All; //for iterations
-            var listDone = new List<TodoTask>(); // tehdyille tehtäville
+            var listDone = todoList.DoneTasks;
+            var listAll = todoList.All; //for iterations            
             var listYetTodo = todoList.TodoItems; // tekemättömille tehtäville
             var tasksCopy = listAll.ToList(); // iterointiin listAll kopio -> vältää 'collection was modified' poikkeuksen
 
@@ -38,8 +38,7 @@ namespace TodoListNS
                 // if user input is yes or y -> add todoList with Id                
                 if (userInput == "yes" || userInput == "y")
                 {
-                    todoList.CompleteItem(item.Id);
-                    listDone.Add(item);                    
+                    todoList.CompleteItem(item.Id);                                      
                 }
             }
 

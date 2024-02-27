@@ -10,18 +10,16 @@ namespace TestingTodoListApp
     {
         private readonly List<TodoTask> _tasks; // lista Todo-"tehtäville"
         private readonly List<TodoTask> _doneTasks; // lista tehdyille tehtäville
+        private readonly List<TodoTask> _todoTasks;
         private int _taskCounter = 0;
-
         public IEnumerable<TodoTask> All => _tasks;
-        public IEnumerable <TodoTask> DoneTasks => _doneTasks;
-        public IEnumerable<TodoTask> TodoItems => _tasks.Except(_doneTasks).ToList();        
-        
-       // public List<TodoTask> TodoItems => _tasks;
+        public IEnumerable<TodoTask> DoneTasks => _doneTasks;
+        public IEnumerable<TodoTask> TodoItems => _tasks.Except(_doneTasks).ToList();     
 
         public TodoList() // konstruktori alustaa task-listat
         {
             _tasks = new List<TodoTask>(); 
-            _doneTasks = new List<TodoTask>();
+            _doneTasks = new List<TodoTask>();            
         }
         public void AddItemToList(TodoTask item) // metodi tehtävän (task) lisäämiseen listaan
         {
@@ -45,7 +43,7 @@ namespace TestingTodoListApp
             if (item != null)
             {                
                 var updatedItem = item with { IsCompleted = true };
-                _tasks.Remove(item);
+                _tasks.Remove(item);                
                 _doneTasks.Add(updatedItem);                
             }            
         }

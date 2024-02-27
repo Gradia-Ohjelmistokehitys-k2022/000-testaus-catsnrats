@@ -23,10 +23,10 @@ namespace TodoListNS
 
             var listDone = todoList.DoneTasks;
             var listAll = todoList.All; //for iterations            
-            var listYetTodo = todoList.TodoItems; // tekemättömille tehtäville
+            var listYetTodo = todoList.TodoItems.ToList(); // tekemättömille tehtäville
             var tasksCopy = listAll.ToList(); // iterointiin listAll kopio -> vältää 'collection was modified' poikkeuksen
 
-            // prints all tasks and asks if it's done
+            // prints all tasks and asks if it's doneS
             Console.WriteLine("Mark tasks as done (yes/y or no/n):");
                        
             foreach (var item in tasksCopy)
@@ -38,11 +38,12 @@ namespace TodoListNS
                 // if user input is yes or y -> add todoList with Id                
                 if (userInput == "yes" || userInput == "y")
                 {
-                    todoList.CompleteItem(item.Id);                                      
+                    todoList.CompleteItem(item.Id);
+                    listYetTodo.Remove(item); // poistaa tehdyn tehtävän listalta YetTodo
                 }
             }
 
-            Console.WriteLine("\nDone tasks");
+            Console.WriteLine("\nDone tasks:");
             foreach (var item in listDone)
             {
                 Console.WriteLine(item);

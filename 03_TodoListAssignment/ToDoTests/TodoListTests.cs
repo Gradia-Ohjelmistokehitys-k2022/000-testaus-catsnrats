@@ -1,0 +1,147 @@
+namespace TodoListTests
+{
+    [TestClass]
+    public class TodoListTests
+    {
+        /* ### AddItemToList -metodin testit ### */
+        [TestMethod]
+        public void AddItemToList_ShouldIncreaseTaskCount()
+        {
+            // arrange
+            TodoList todoList = new();
+
+            // act
+            todoList.AddItemToList(new TodoTask("Test task 1"));
+
+            // assert
+            Assert.AreEqual(1, todoList.All.Count());
+        }
+
+        [TestMethod]
+        public void AddItemToList_ShouldAssignUniqueIds()
+        {
+            // arrange
+            TodoList todoList = new();
+
+            // act
+            todoList.AddItemToList(new TodoTask("Test task 1"));
+            todoList.AddItemToList(new TodoTask("Test task 2"));
+
+            // assert
+            var tasks = todoList.All.ToList();
+            Assert.AreEqual(2, tasks.Count);
+            Assert.AreNotEqual(0, tasks[1].Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddItemToList_ShouldThrowArgumentNullException_WhenTaskIsNull()
+        {
+            // arrange
+            TodoList todoList = new();
+
+            // act
+            todoList.AddItemToList(null);
+
+            // assert
+            // except exception
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddItemToList_ShouldThrowArgumentException_WhenTaskDescriptionIsEmpty()
+        {
+            // arrange
+            TodoList todoList = new();
+
+            // act
+            todoList.AddItemToList(new TodoTask(string.Empty));
+
+            // assert
+            // except argument exception
+        }
+        [TestMethod]
+        public void AddLargeNumberOfItems_ShouldNotExceedMemoryLimits()
+        {
+            // arrange
+            TodoList todoList = new();
+
+            // act
+            for (int i = 0; i < 1000000; i++) // lisää listaan miljoona tehtävää
+            {
+                todoList.AddItemToList(new TodoTask($"Task {i + 1}"));
+            }
+
+            // assert
+            Assert.AreEqual(1000000, todoList.All.Count());
+        }
+
+        /* ### RemoveItemFromList -metodin testit ### */
+
+        [TestMethod]
+        public void RemoveItemFromList_ShouldRemoveExistingItem()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task = new("Test task");
+            todoList.AddItemToList(task);
+
+            // act
+            todoList.RemoveItemFromList(task);
+
+            // arrange
+            CollectionAssert.DoesNotContain(todoList.All.ToList(), task);
+        }
+
+        [TestMethod]
+        public void RemoveItemFromList_ShouldNotAffectListForNonExistingItem() // poista olematon 'item' listalta
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task = new("Test task");
+
+            // act
+            todoList.RemoveItemFromList(task);
+
+            // assert
+            CollectionAssert.DoesNotContain(todoList.All.ToList().ToList(), task);
+        }
+
+        [TestMethod]
+        public void RemoveItemFromList_ShouldAdjustTaskCounter()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task1 = new("Test task 1");
+            TodoTask task2 = new("Test task 2");
+            todoList.AddItemToList(task1);
+            todoList.AddItemToList(task2);
+
+            // act
+            todoList.RemoveItemFromList(task1);
+
+            // assert
+            CollectionAssert.DoesNotContain(todoList.All.ToList(), task1);
+        }
+
+        [TestMethod]
+        public void RemoveItemFromList_ShouldRemoveItemWithSpecificID()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task1 = new TodoTask("Test task 1");
+            TodoTask task2 = new TodoTask("Test task 2");            
+            todoList.AddItemToList(task1);
+            todoList.AddItemToList(task2);            
+
+            // act
+            todoList.RemoveItemFromList(task1); // ID 2 tehtävän poisto
+
+            // assert
+            CollectionAssert.DoesNotContain(todoList.All.ToList(), task1); // varmistaa, että task2 (ID 2) on poistettu
+
+            // varmistaa, että task2 on listalla
+            CollectionAssert.Contains(todoList.All.ToList(), task2);            
+        }
+    }
+}

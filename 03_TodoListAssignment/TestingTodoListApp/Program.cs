@@ -11,6 +11,7 @@ namespace TodoListNS
         {
             TodoList todoList = new();
             
+            // Lisätty tehtävään toiminnallisuutta testimetodien lisäksi //
             // lisää tehtäviä listaan
             todoList.AddItemToList(new TodoTask("Go to the gym"));
             todoList.AddItemToList(new TodoTask("Buy groceries"));
@@ -20,15 +21,22 @@ namespace TodoListNS
             todoList.AddItemToList(new TodoTask("Do the dishes"));          
             todoList.AddItemToList(new TodoTask("Wash your clothes"));
             todoList.AddItemToList(new TodoTask("Vacuum the living room"));
+            todoList.AddItemToList(new TodoTask("#¤%#! bathe the cat !")); // tehtäväkuvaus erikoismerkeillä
 
             var listDone = todoList.DoneTasks;
             var listAll = todoList.All; //for iterations            
             var listYetTodo = todoList.TodoItems.ToList(); // tekemättömille tehtäville
             var tasksCopy = listAll.ToList(); // iterointiin listAll kopio -> vältää 'collection was modified' poikkeuksen
 
-            // prints all tasks and asks if it's doneS
-            Console.WriteLine("Mark tasks as done (yes/y or no/n):");
-                       
+            // prints all tasks
+            Console.WriteLine("TASKS TO DO TODAY !\n");
+            foreach (var item in listAll)
+            {
+                Console.WriteLine(item);
+            }
+
+            // käy tehtävät läpi ja kysyy onko tehty
+            Console.WriteLine("\nMark tasks as done (yes / y or no/ n):\n");
             foreach (var item in tasksCopy)
             {
                 Console.WriteLine(item);

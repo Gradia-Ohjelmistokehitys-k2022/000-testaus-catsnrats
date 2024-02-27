@@ -9,8 +9,7 @@ namespace TestingTodoListApp
     public class TodoList
     {
         private readonly List<TodoTask> _tasks; // lista Todo-"tehtäville"
-        private readonly List<TodoTask> _doneTasks; // lista tehdyille tehtäville
-        private readonly List<TodoTask> _todoTasks;
+        private readonly List<TodoTask> _doneTasks; // lista tehdyille tehtäville        
         private int _taskCounter = 0;
         public IEnumerable<TodoTask> All => _tasks;
         public IEnumerable<TodoTask> DoneTasks => _doneTasks;
@@ -23,6 +22,16 @@ namespace TestingTodoListApp
         }
         public void AddItemToList(TodoTask item) // metodi tehtävän (task) lisäämiseen listaan
         {
+            if (item == null) // mikäli "task" on null
+            {
+                throw new ArgumentNullException(nameof(item), "Task cannot be null.");
+            }
+
+            if (string.IsNullOrWhiteSpace(item.TaskDescription)) // mikäli tehtäväkuvaus on tyhjä tai välilyönti
+            {
+                throw new ArgumentException("Task description cannot be empty or whitespace.");
+            }
+
             _taskCounter++;
             _tasks.Add(item with { Id = _taskCounter});
         }
@@ -45,7 +54,11 @@ namespace TestingTodoListApp
                 var updatedItem = item with { IsCompleted = true };
                 _tasks.Remove(item);                
                 _doneTasks.Add(updatedItem);                
-            }            
+            }
+            else
+            {
+                Console.WriteLine($"Task with Id {id} not found in the undone tasks list.");
+            }
         }
     }
 }

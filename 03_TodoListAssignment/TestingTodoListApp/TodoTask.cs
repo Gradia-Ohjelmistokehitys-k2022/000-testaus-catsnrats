@@ -12,6 +12,6 @@ namespace TestingTodoListApp
         // uniikki Id tehtävälle (task)
         public int Id { get; init; } //init makes property immutable which means you cannot change value with set afterwards.
         public bool IsCompleted { get; init; } // boolean (onko tehtävä tehty vai ei)
-        public override string ToString() => $"Id: {Id} | Task: {TaskDescription} | Did you do it?: {IsCompleted}";
+        public override string ToString() => $"Id: {Id} | Task: {TaskDescription} | Did you do it?: {IsCompleted}";        
     }
 }

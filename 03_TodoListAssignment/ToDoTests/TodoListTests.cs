@@ -129,8 +129,8 @@ namespace TodoListTests
         {
             // arrange
             TodoList todoList = new();
-            TodoTask task1 = new TodoTask("Test task 1");
-            TodoTask task2 = new TodoTask("Test task 2");            
+            TodoTask task1 = new("Test task 1");
+            TodoTask task2 = new("Test task 2");            
             todoList.AddItemToList(task1);
             todoList.AddItemToList(task2);            
 
@@ -138,10 +138,60 @@ namespace TodoListTests
             todoList.RemoveItemFromList(task1); // ID 2 tehtävän poisto
 
             // assert
-            CollectionAssert.DoesNotContain(todoList.All.ToList(), task1); // varmistaa, että task2 (ID 2) on poistettu
+            CollectionAssert.DoesNotContain(todoList.All.ToList(), task1); // varmistaa, että task1 (ID 1) on poistettu
 
             // varmistaa, että task2 on listalla
             CollectionAssert.Contains(todoList.All.ToList(), task2);            
         }
+
+        /* ### CompleteItem -metodin testit ### */
+
+        [TestMethod]
+        public void CompleteItem_ShouldNotCompleteTask_WhenIdExistsInUndoneTasks()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task1 = new("Test task 1");
+            todoList.AddItemToList(task1);
+
+            // act
+            todoList.CompleteItem(task1.Id + 1);
+
+            // assert
+            Assert.IsFalse(todoList.DoneTasks.Contains(task1));
+            Assert.IsTrue(todoList.TodoItems.Contains(task1));
+        }
+
+        [TestMethod]
+        public void CompleteItem_ShouldMoveTaskToDoneTasks_WhenCompleted()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task1 = new TodoTask("Test task 1");
+            todoList.AddItemToList(task1);
+
+            // act
+            todoList.CompleteItem(task1.Id);
+
+            // assert
+            CollectionAssert.Contains(todoList.DoneTasks.ToList(), task1);
+        }
+
+        [TestMethod]
+        public void CompleteItem_ShouldNotCompleteTask_WhenIdDoesNotExistInUndoneTasksList()
+        {
+            // Arrange
+            TodoList todoList = new();
+            TodoTask task1 = new TodoTask("Test task 1");
+            todoList.AddItemToList(task1);
+
+            // Act
+            todoList.CompleteItem(task1.Id + 1); // Using a different ID
+
+            // Assert
+            Assert.IsFalse(todoList.DoneTasks.Contains(task1));
+            //Assert.IsTrue(todoList.TodoItems.Contains(task1));
+        }
+
     }
 }

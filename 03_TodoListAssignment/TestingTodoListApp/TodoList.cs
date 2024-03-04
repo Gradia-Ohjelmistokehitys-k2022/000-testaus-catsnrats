@@ -33,7 +33,7 @@ namespace TestingTodoListApp
             }
 
             _taskCounter++;
-            _tasks.Add(item with { Id = _taskCounter});
+            _tasks.Add(item with { Id = _taskCounter });
         }
         public void RemoveItemFromList(TodoTask item) // metodi tehtävän poistoon ? onko tarpeellinen
         {

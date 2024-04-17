@@ -201,9 +201,29 @@ namespace TodoListTests
             todoList.CompleteItem(task1.Id + 1); // Using a different ID
 
             // Assert
-            Assert.IsFalse(todoList.DoneTasks.Contains(task1));
-            //Assert.IsTrue(todoList.TodoItems.Contains(task1));
+            Assert.IsFalse(todoList.DoneTasks.Contains(task1)); // varmistus ettei task1 ole tehty
         }
 
+        [TestMethod]
+        public void CompleteItem_ShouldMarkTaskAsDone_WhenIdExistInUndoneTaskList()
+        {
+            // arrange
+            TodoList todoList = new();
+            TodoTask task1 = new TodoTask("Test task 1");
+            todoList.AddItemToList(task1);
+
+            TodoTask addedTask = todoList.All.FirstOrDefault();
+
+            // act
+            todoList.CompleteItem(addedTask.Id);
+
+            // assert
+            // noukkii tehdyn taskin tehtyjen listalta
+            var completedTask = todoList.DoneTasks.FirstOrDefault(t => t.Id == addedTask.Id);
+
+            // varmistaa ettei tehty taski ole null ja IsCompleted = true
+            Assert.IsNotNull(completedTask, "Tehty tehtävä ei löytynyt tehtyjen listalta.");
+            Assert.IsTrue(completedTask.IsCompleted, "Tehdyn tehtävän arvo ei ole true");
+        }
     }
 }

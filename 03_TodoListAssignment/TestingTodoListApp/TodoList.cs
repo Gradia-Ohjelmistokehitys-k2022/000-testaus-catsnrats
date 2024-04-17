@@ -19,7 +19,8 @@ namespace TestingTodoListApp
         {
             _tasks = new List<TodoTask>(); 
             _doneTasks = new List<TodoTask>();            
-        }
+        }        
+
         public void AddItemToList(TodoTask item) // metodi tehtävän (task) lisäämiseen listaan
         {
             if (item == null) // mikäli "task" on null

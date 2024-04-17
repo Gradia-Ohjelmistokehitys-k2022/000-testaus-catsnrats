@@ -132,16 +132,20 @@ namespace TodoListTests
             TodoTask task1 = new("Test task 1");
             TodoTask task2 = new("Test task 2");            
             todoList.AddItemToList(task1);
-            todoList.AddItemToList(task2);            
+            todoList.AddItemToList(task2);
+
+            // noutaa taskit listalta päivittyneen Id:n kera
+            TodoTask addedTask1 = todoList.All.First(t => t.TaskDescription == "Test task 1");
+            TodoTask addedTask2 = todoList.All.First(t => t.TaskDescription == "Test task 2");
 
             // act
-            todoList.RemoveItemFromList(task1); // ID 2 tehtävän poisto
+            todoList.RemoveItemFromList(addedTask1); // ID 1 tehtävän poisto
 
             // assert
-            CollectionAssert.DoesNotContain(todoList.All.ToList(), task1); // varmistaa, että task1 (ID 1) on poistettu
+            CollectionAssert.DoesNotContain(todoList.All.ToList(), addedTask1); // varmistaa, että task1 (ID 1) on poistettu
 
             // varmistaa, että task2 on listalla
-            CollectionAssert.Contains(todoList.All.ToList(), task2);            
+            CollectionAssert.Contains(todoList.All.ToList(), addedTask2);            
         }
 
         /* ### CompleteItem -metodin testit ### */
@@ -154,12 +158,15 @@ namespace TodoListTests
             TodoTask task1 = new("Test task 1");
             todoList.AddItemToList(task1);
 
+            // task1 id pysyy oletusarvossa, vain todoList sisällä "Test task 1" saa uuden id:n
+            TodoTask addedTask = todoList.All.FirstOrDefault();
+
             // act
-            todoList.CompleteItem(task1.Id + 1);
+            todoList.CompleteItem(addedTask.Id + 1);
 
             // assert
-            Assert.IsFalse(todoList.DoneTasks.Contains(task1));
-            Assert.IsTrue(todoList.TodoItems.Contains(task1));
+            Assert.IsFalse(todoList.DoneTasks.Contains(addedTask));
+            Assert.IsTrue(todoList.TodoItems.Contains(addedTask));
         }
 
         [TestMethod]
@@ -170,11 +177,16 @@ namespace TodoListTests
             TodoTask task1 = new TodoTask("Test task 1");
             todoList.AddItemToList(task1);
 
-            // act
-            todoList.CompleteItem(task1.Id);
+            // `task1` does not get its Id updated -> retrieve it back from the todoList
+            TodoTask addedTask = todoList.All.FirstOrDefault();
 
-            // assert
-            CollectionAssert.Contains(todoList.DoneTasks.ToList(), task1);
+            // act            
+            todoList.CompleteItem(addedTask.Id);            
+
+            // assert        
+            var completedTask = todoList.DoneTasks.FirstOrDefault(t => t.Id == addedTask.Id);
+            Assert.IsNotNull(completedTask, "Task should be in done tasks.");
+            Assert.IsTrue(completedTask.IsCompleted, "Task should be marked as completed.");
         }
 
         [TestMethod]
